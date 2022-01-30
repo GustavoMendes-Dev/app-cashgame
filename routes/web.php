@@ -29,3 +29,7 @@ Route::post('/close-match/{id}', [ MatchController::class, 'close'])->name('clos
 Route::post('/new-player-in-match/{id}', [ MatchController::class, 'newPlayerInMatch'])->name('newPlayerInMatch');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
