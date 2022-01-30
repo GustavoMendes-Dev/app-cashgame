@@ -57,9 +57,9 @@
                                             <td class="fs-6">{{  'R$ '.number_format($player->balance, 2, ',', '.') }}</td>
                                             <td>
                                                 @if ($player->status >= 1) 
-                                                    <span class="badge badge-light-success">Ativo</span>
-                                                @else 
                                                     <span class="badge badge-light-info">Inativo</span>
+                                                @else 
+                                                    <span class="badge badge-light-success">Ativo</span>
                                                 @endif
                                             </td>
                                             <td class="text-end">
