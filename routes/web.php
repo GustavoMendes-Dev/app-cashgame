@@ -18,18 +18,18 @@ use App\Http\Controllers\MovementController;
 |
 */
 
-Route::get('/', [ DashBoardController::class, 'index']);
-
-Route::resource('/matchs', MatchController::class);
-Route::resource('/players', PlayerController::class);
-Route::resource('/movements', MovementController::class);
-
-Route::post('/sellchips/{id}', [ MovementController::class, 'sellchips'])->name('sellchips');
-Route::post('/close-match/{id}', [ MatchController::class, 'close'])->name('close.match');
-Route::post('/new-player-in-match/{id}', [ MatchController::class, 'newPlayerInMatch'])->name('newPlayerInMatch');
-
-
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth:web'])->group(function () {
+
+    Route::get('/', [ DashBoardController::class, 'index'])->name('home');
+    Route::resource('/matchs', MatchController::class);
+    Route::resource('/players', PlayerController::class);
+    Route::resource('/movements', MovementController::class);
+
+    Route::post('/sellchips/{id}', [ MovementController::class, 'sellchips'])->name('sellchips');
+    Route::post('/close-match/{id}', [ MatchController::class, 'close'])->name('close.match');
+    Route::post('/new-player-in-match/{id}', [ MatchController::class, 'newPlayerInMatch'])->name('newPlayerInMatch');
+
+});
+
