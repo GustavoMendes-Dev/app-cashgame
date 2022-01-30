@@ -45,25 +45,9 @@
 													<!--begin::Info-->
 													<div class="d-flex flex-wrap flex-center">
 														<!--begin::Stats-->
-														<div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
-															<div class="fs-4 fw-bolder text-gray-700">
-																<span class="w-75px">6,900</span>
-																<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-																<span class="svg-icon svg-icon-3 svg-icon-success">
-																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-																		<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black"></rect>
-																		<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black"></path>
-																	</svg>
-																</span>
-																<!--end::Svg Icon-->
-															</div>
-															<div class="fw-bold text-muted">Total</div>
-														</div>
-														<!--end::Stats-->
-														<!--begin::Stats-->
 														<div class="border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3">
 															<div class="fs-4 fw-bolder text-gray-700">
-																<span class="w-50px">130</span>
+																<span class="w-50px">{{  'R$ '.number_format($output, 2, ',', '.') }}</span>
 																<!--begin::Svg Icon | path: icons/duotune/arrows/arr065.svg-->
 																<span class="svg-icon svg-icon-3 svg-icon-danger">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -79,7 +63,7 @@
 														<!--begin::Stats-->
 														<div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
 															<div class="fs-4 fw-bolder text-gray-700">
-																<span class="w-50px">500</span>
+																<span class="w-50px">{{  'R$ '.number_format($input, 2, ',', '.') }}</span>
 																<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
 																<span class="svg-icon svg-icon-3 svg-icon-success">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -195,15 +179,15 @@
 																		<!--begin::Card toolbar-->
                                                                         <div class="card-toolbar">
                                                                             <!--begin::Filter-->
-                                                                            <button onclick="AddSellChips({{$player->id}})" type="button" class="btn btn-sm btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
+                                                                            <button onclick="AddSellChips({{$player->id}})" type="button" class="btn btn-sm btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
                                                                             <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                                            <span class="svg-icon svg-icon-3">
+                                                                            <!-- <span class="svg-icon svg-icon-3">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                                                     <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
                                                                                     <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
                                                                                     <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
                                                                                 </svg>
-                                                                            </span>
+                                                                            </span> -->
                                                                             <!--end::Svg Icon-->Fichas</button>
                                                                             <!--end::Filter-->
                                                                         </div>

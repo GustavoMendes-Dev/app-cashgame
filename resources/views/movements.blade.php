@@ -320,15 +320,16 @@
         </div>
     </div>
 </div>
-@include('modals.add-match')
+@include('modals.add-movement')
 <script>
-    let modal = document.querySelector("#modal_add_match");
+    let modal = document.querySelector("#modal_add_movement");
 
     function AddMovement(){
         console.log('cliquei');
         modal.classList.add("show-modal");
         modal.classList.add("show");
         modal.style.display = 'block';
+
     }
 
     function closeModal() {

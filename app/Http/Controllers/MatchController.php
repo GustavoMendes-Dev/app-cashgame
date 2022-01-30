@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Match;
 use App\Models\Player;
 use App\Models\Start;
+use App\Models\Movement;
 
 class MatchController extends Controller
 {
@@ -62,12 +63,16 @@ class MatchController extends Controller
     {
         $match = Match::findOrFail($id);
         $match->load('players');
+        $match->load('movement');
+
+        $input = collect($match->movement)->where('type', 0)->sum('value');
+        $output = collect($match->movement)->where('type', 1)->sum('value');
 
         // Lista de Jogadores dentro do modal da partida.
         $players = Player::where('status', 0)->get();
 
-        return view('match-details', compact('match', 'players')); 
-        // return response()->json($match); 
+        return view('match-details', compact('match', 'players', 'output', 'input')); 
+        // return response()->json($input); 
     }
 
     /**

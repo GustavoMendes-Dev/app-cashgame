@@ -8,9 +8,15 @@ use Illuminate\Http\JsonResponse;
 use App\Models\Movement;
 use App\Models\Player;
 use App\Models\Start;
+use App\Models\Match;
 
 class MovementController extends Controller
 {
+    public function matchs(){
+        $matchs = Match::where('status', 1)->get();
+        return $matchs;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +25,8 @@ class MovementController extends Controller
     public function index()
     {
         $movements = Movement::orderBy('created_at','desc')->get();
+
+        $matchs = $this->matchs();
         
         $inputTotal = collect($movements)->where('type', 0)->sum('value');
         $outputTotal = collect($movements)->where('type', 1)->sum('value');
@@ -27,7 +35,7 @@ class MovementController extends Controller
         $filterByDate = $movements->where('created_at', "2022-01-21 22:13:43");
         $filterByStatus = $filterByDate->where('status', 0);
 
-        return view('movements', compact('movements', 'inputTotal', 'outputTotal', 'toReceive'));
+        return view('movements', compact('movements', 'inputTotal', 'outputTotal', 'toReceive', 'matchs'));
     }
 
     /**
@@ -61,6 +69,7 @@ class MovementController extends Controller
             'value' => $request['value'],
             'payment' => $request['payment'],
             'status' => 0, // Por padrão é "Pago".
+            'match_id' => $id,
         ]);
 
         // Se o pagamento for Fiado, o status muda para À receber.
@@ -88,7 +97,7 @@ class MovementController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
@@ -99,7 +108,19 @@ class MovementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type = $request['type'];
+
+        $sell = Movement::create([
+            'type' => $type, // Entrada ou saída.
+            'description' => $request['description'],
+            'value' => $request['value'],
+            'payment' => $request['payment'],
+            'status' => 0, // Por padrão é "Pago".
+            'match_id' => $request['match'],
+        ]);
+
+        return back()->withInput()->with('status', 'Movimento de cadastrado com sucesso!');
+
     }
 
     /**

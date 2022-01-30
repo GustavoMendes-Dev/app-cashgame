@@ -19,6 +19,7 @@ class CreateMovementTable extends Migration
             $table->integer('type');
             $table->float('value');
             $table->integer('status');
+            $table->integer('match_id')->nullable();
             $table->integer('payment');
             $table->timestamps();
         });

@@ -15,9 +15,9 @@ class CreateForeignMatchPlayersTable extends Migration
     {
         Schema::create('foreign_match_players', function (Blueprint $table) {
             $table->unsignedBigInteger('match_id');
-            $table->foreign('match_id')->references('id')->on('matchs')->onDelete('cascade');;
+            $table->foreign('match_id')->references('id')->on('matchs')->onDelete('cascade');
             $table->unsignedBigInteger('player_id');
-            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');;
+            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
             $table->timestamps();
         });
     }

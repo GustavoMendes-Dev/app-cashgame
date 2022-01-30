@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Movement extends Model
 {
@@ -12,4 +13,9 @@ class Movement extends Model
     protected $table = 'movement';
 
     public $guarded = [];
+
+    public function match(): BelongsTo
+    {
+        return $this->belongsTo(Match::class, 'match_id', 'id');
+    }
 }
