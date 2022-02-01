@@ -144,9 +144,9 @@
 															<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
 																<!--begin::Table row-->
 																<tr class="text-start text-muted text-uppercase gs-0">
-                                                                    <th class="min-w-100px sorting" tabindex="0" aria-controls="kt_table_customers_payment" rowspan="1" colspan="1" aria-label="Invoice No.: activate to sort column ascending" style="width: 150px;">Nome</th>
-                                                                    <th class="sorting" tabindex="0" aria-controls="kt_table_customers_payment" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 100px;">Status</th>
-                                                                    <th class="sorting" tabindex="0" aria-controls="kt_table_customers_payment" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 120px;">Saldo</th>
+                                                                    <th class="min-w-100px sorting" style="width: 150px;">Nome</th>
+                                                                    <th class="sorting" style="width: 80px;">Status</th>
+                                                                    <th class="sorting" style="width: 150px;">Saldo</th>
                                                                     <th class="text-end min-w-100px pe-4 sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">Ações</th>
                                                                 </tr>
 																<!--end::Table row-->
@@ -175,12 +175,12 @@
 																	<td>{{  'R$ '.number_format($player->balance, 2, ',', '.') }}</td>
 																	<!--end::Amount=-->
 																	<!--begin::Action=-->
-																	<td class="pe-0 text-end">
+																	<td class="text-end">
 																		<!--begin::Card toolbar-->
-                                                                        <div class="card-toolbar">
+                                                                        <div class="d-flex my-4">
                                                                             <!--begin::Filter-->
-                                                                            <button onclick="AddSellChips({{$player->id}})" type="button" class="btn btn-sm btn-flex btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
-                                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                                                            <button onclick="AddSellChips({{$player->id}})" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
+                                                                            <!-- begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
                                                                             <!-- <span class="svg-icon svg-icon-3">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                                                     <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
@@ -188,10 +188,17 @@
                                                                                     <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
                                                                                 </svg>
                                                                             </span> -->
-                                                                            <!--end::Svg Icon-->Fichas</button>
+                                                                            <!--end::Svg Icon -->
+                                                                            Fichas</button>
                                                                             <!--end::Filter-->
+                                                                            <!--begin::Actions-->
+                                                                            <button onclick="CloseSellChips({{$player->id}})" class="btn btn-sm btn-danger">
+                                                                                <span class="indicator-label">Encerrar</span>
+                                                                            </button>
+                                                                            <!--end::Actions-->
                                                                         </div>
                                                                         <!--end::Card toolbar-->
+                                                                        
 																	</td>
 																	<!--end::Action=-->
 																</tr>
@@ -218,11 +225,13 @@
     </div>
 </div>
 @include('modals.add-start-player')
+@include('modals.close-sellchips')
 @include('modals.add-sellchips')
 
 <script>
     let modal = document.querySelector("#modal_add_start_player");
     let modalSellChips = document.querySelector("#modal_add_sell_chips");
+    let modalSellChipsClose = document.querySelector("#modal_close_sell_chips");
 
     function AddPlayer(){
         console.log('cliquei');
@@ -240,6 +249,10 @@
         modalSellChips.classList.remove("show-modal");
         modalSellChips.classList.remove("show");
         modalSellChips.style.display = 'none';
+
+        modalSellChipsClose.classList.remove("show-modal");
+        modalSellChipsClose.classList.remove("show");
+        modalSellChipsClose.style.display = 'none';
     }
 
     function AddSellChips(id){
@@ -261,8 +274,30 @@
                 console.log('error', error);
             },
         });
+   
+    }
 
+    function CloseSellChips(id){
         
+        $.ajax({
+            type:'GET',
+            url: `/players/${id}`,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'JSON',
+            success:function(res){
+                console.log(res);
+                document.querySelector("#name_player").value = res.name;
+                document.querySelector("#id_player").value = res.id;
+
+                modalSellChipsClose.classList.add("show-modal");
+                modalSellChipsClose.classList.add("show");
+                modalSellChipsClose.style.display = 'block';
+            },
+            error:function(error){
+                console.log('error', error);
+            },
+        });
+   
     }
 
 </script>

@@ -1,5 +1,5 @@
 		<!--begin::Modal - New Card-->
-		<div class="modal fade" id="modal_add_sell_chips" tabindex="-1" aria-hidden="true">
+		<div class="modal fade" id="modal_close_sell_chips" tabindex="-1" aria-hidden="true">
 			<!--begin::Modal dialog-->
 			<div class="modal-dialog modal-dialog-centered mw-650px">
 				<!--begin::Modal content-->
@@ -7,7 +7,7 @@
 					<!--begin::Modal header-->
 					<div class="modal-header">
 						<!--begin::Modal title-->
-						<h2>Fichas</h2>
+						<h2>Encerrar Jogador</h2>
 						<!--end::Modal title-->
 						<!--begin::Close-->
 						<button onclick="closeModal()" class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
