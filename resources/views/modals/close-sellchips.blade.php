@@ -35,7 +35,7 @@
 						</div>
 					@endif
 						<!--begin::Form-->
-						<form id="kt_modal_new_match" class="form" action="{{ url('/sellchips', $match->id)}}" method="POST">
+						<form id="kt_modal_new_match" class="form" action="{{ route('close-sellchips', $match->id)}}" method="POST">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 							<!--begin::Input group-->
 							<div class="d-flex flex-column mb-7 fv-row">
@@ -50,16 +50,70 @@
 									<input type="hidden" name="player_id" id="id_player" required/>
 								</div>
 								<!--end::Input group-->
-								<!--begin::Input group-->
-								<div class="d-flex flex-column mb-7 fv-row">
-									<!--begin::Label-->
-									<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-										<span class="required">Valor</span>
-									</label>
-									<!--end::Label-->
-									<input type="text" class="form-control form-control-solid" placeholder="" name="value" required/>
+								<div class="row g-8">
+									<div class="col-lg-4">
+										<!--begin::Input group-->
+										<div class="d-flex flex-column mb-7 fv-row">
+											<!--begin::Label-->
+											<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+												<span class="required">Saldo anterior</span>
+											</label>
+											<!--end::Label-->
+											<input disabled type="text" class="form-control form-control-solid" placeholder="" name="balance" id="balance_player"/>
+										</div>
+									<!--end::Input group-->
+									</div>
+									<div class="col-lg-4">
+										<!--begin::Input group-->
+										<div class="d-flex flex-column mb-7 fv-row">
+											<!--begin::Label-->
+											<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+												<span class="required">Fichas</span>
+											</label>
+											<!--end::Label-->
+											<input type="text" class="form-control form-control-solid" placeholder="" name="buy_chips" id="buy_chips"/>
+										</div>
+									<!--end::Input group-->
+									</div>
+									<div class="col-lg-4">
+										<!--begin::Input group-->
+										<div class="d-flex flex-column mb-7 fv-row">
+											<!--begin::Label-->
+											<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+												<span class="required">Total</span>
+											</label>
+											<!--end::Label-->
+											<input disabled type="text" class="form-control form-control-solid" placeholder="" id="total"/>
+										</div>
+									<!--end::Input group-->
+									</div>
 								</div>
-								<!--end::Input group-->
+								<div class="row g-8">
+									<div class="col-lg-4">
+										<!--begin::Input group-->
+										<div class="d-flex flex-column mb-7 fv-row">
+											<!--begin::Label-->
+											<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+												<span class="required">Valor pago</span>
+											</label>
+											<!--end::Label-->
+											<input type="text" class="form-control form-control-solid" placeholder="" name="amount_paid" id="amount_paid" required/>
+										</div>
+										<!--end::Input group-->
+									</div>
+									<div class="col-lg-4">
+										<!--begin::Input group-->
+										<div class="d-flex flex-column mb-7 fv-row">
+											<!--begin::Label-->
+											<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+												<span class="required">Saldo atual</span>
+											</label>
+											<!--end::Label-->
+											<input type="text" class="form-control form-control-solid" placeholder="" name="current_balance" id="current_balance" required/>
+										</div>
+										<!--end::Input group-->
+									</div>
+								</div>
                                 <div class="mb-10">
                                     <!--begin::Label-->
                                     <label class="form-label fw-bold">Pagamento</label>

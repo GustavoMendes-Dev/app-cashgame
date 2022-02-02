@@ -80,14 +80,52 @@ class MovementController extends Controller
 
             $current = $pending->balance - $request['value'];
             $pending->update(['balance' => $current]);
-        }else{
-            $current = $pending->balance + $request['value'];
-            $pending->update(['balance' => $current]);
         };
 
         // return response()->json($pending);
         return back()->withInput()->with('status', 'Fichas adicionadas para ' . $pending->name . ' com sucesso!');
      
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function closesellchips(Request $request, $id)
+    {
+        $player = $request['player_id'];
+        $pending = Player::FindOrFail($player);
+
+        if($request['amount_paid'] > 0) {
+
+            $sell = Movement::create([
+                'description' => "Encerramento " . $pending->name,
+                'status' => 0, // Por padrão é "Pago".
+                'type' => 1, // Saída
+                'value' => $request['amount_paid'],
+                'payment' => $request['payment'],
+                'match_id' => $id,
+            ]);
+
+        }
+
+        if($request['buy_chips'] > 0) {
+
+            $closeSell = Movement::create([
+                'description' => "Entrada de fichas do jogador " . $pending->name,
+                'value' => $request['buy_chips'],
+                'payment' => 10,
+                'type' => 0, // Entrada.
+                'status' => 0, // Por padrão é "Pago".
+                'match_id' => $id,
+            ]);
+        } 
+
+        $pending->update(['balance' => $request['current_balance']]);
+
+        return back()->withInput()->with('status', 'Jogador ' . $pending->name . ' encerrado com sucesso!');
+
     }
 
     /**

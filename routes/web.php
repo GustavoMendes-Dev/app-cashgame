@@ -28,6 +28,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::resource('/movements', MovementController::class);
 
     Route::post('/sellchips/{id}', [ MovementController::class, 'sellchips'])->name('sellchips');
+    Route::post('/close-sellchips/{id}', [ MovementController::class, 'closesellchips'])->name('close-sellchips');
     Route::post('/close-match/{id}', [ MatchController::class, 'close'])->name('close.match');
     Route::post('/new-player-in-match/{id}', [ MatchController::class, 'newPlayerInMatch'])->name('newPlayerInMatch');
 

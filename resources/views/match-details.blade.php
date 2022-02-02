@@ -264,8 +264,8 @@
             dataType: 'JSON',
             success:function(res){
                 console.log(res);
-                document.querySelector("#name_player").value = res.name;
-                document.querySelector("#id_player").value = res.id;
+                document.querySelector("#add_name_player").value = res.name;
+                document.querySelector("#add_id_player").value = res.id;
                 modalSellChips.classList.add("show-modal");
                 modalSellChips.classList.add("show");
                 modalSellChips.style.display = 'block';
@@ -288,15 +288,35 @@
                 console.log(res);
                 document.querySelector("#name_player").value = res.name;
                 document.querySelector("#id_player").value = res.id;
+                let balance = document.querySelector("#balance_player");
+                balance.value = res.balance;
+
+                let amount_paid = document.querySelector("#amount_paid");
+                let current_balance = document.querySelector("#current_balance");
 
                 modalSellChipsClose.classList.add("show-modal");
                 modalSellChipsClose.classList.add("show");
                 modalSellChipsClose.style.display = 'block';
+
+                $('#buy_chips').bind('input', function() {
+                    let buy = parseInt($(this).val(), 10);
+                    let total = (document.querySelector("#total"));
+
+                    total.value = buy + parseInt(balance.value, 10);
+                    amount_paid.value = 0;
+                    current_balance.value = parseInt(total.value, 10) + parseInt(amount_paid.value, 10)
+                });
+
+                $('#amount_paid').bind('input', function(){
+                    current_balance.value = parseInt(total.value, 10) - parseInt($(this).val(), 10);
+                });
             },
             error:function(error){
                 console.log('error', error);
             },
         });
+
+        
    
     }
 

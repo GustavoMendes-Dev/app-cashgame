@@ -46,8 +46,8 @@
 										<span class="required">Jogador</span>
 									</label>
 									<!--end::Label-->
-									<input disabled type="text" class="form-control form-control-solid" placeholder="" name="player" id="name_player"/>
-									<input type="hidden" name="player_id" id="id_player" required/>
+									<input disabled type="text" class="form-control form-control-solid" placeholder="" name="player" id="add_name_player"/>
+									<input type="hidden" name="player_id" id="add_id_player" required/>
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
