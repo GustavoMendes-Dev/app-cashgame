@@ -12,6 +12,13 @@ use App\Models\Match;
 
 class MovementController extends Controller
 {
+    public $movements;
+
+    public function __construct(Movement $movements)
+    {
+        $this->movements = $movements;
+    }
+
     public function matchs(){
         $matchs = Match::where('status', 1)->get();
         return $matchs;
@@ -24,7 +31,7 @@ class MovementController extends Controller
      */
     public function index()
     {
-        $movements = Movement::orderBy('created_at','desc')->get();
+        $movements = $this->movements->orderBy('created_at','desc')->get();
 
         $matchs = $this->matchs();
         
@@ -63,7 +70,7 @@ class MovementController extends Controller
         //     ]);
         // }
 
-        $sell = Movement::create([
+        $sell = $this->movements->create([
             'description' => "Compra de Fichas " . $pending->name,
             'type' => 0, // Entrada.
             'value' => $request['value'],
@@ -99,7 +106,7 @@ class MovementController extends Controller
 
         if($request['amount_paid'] > 0) {
 
-            $sell = Movement::create([
+            $sell = $this->movements->create([
                 'description' => "Encerramento " . $pending->name,
                 'status' => 0, // Por padrão é "Pago".
                 'type' => 1, // Saída
@@ -112,7 +119,7 @@ class MovementController extends Controller
 
         if($request['buy_chips'] > 0) {
 
-            $closeSell = Movement::create([
+            $closeSell = $this->movements->create([
                 'description' => "Entrada de fichas do jogador " . $pending->name,
                 'value' => $request['buy_chips'],
                 'payment' => 10,
@@ -148,7 +155,7 @@ class MovementController extends Controller
     {
         $type = $request['type'];
 
-        $sell = Movement::create([
+        $sell = $this->movements->create([
             'type' => $type, // Entrada ou saída.
             'description' => $request['description'],
             'value' => $request['value'],
@@ -203,7 +210,7 @@ class MovementController extends Controller
      */
     public function destroy($id)
     {
-        $movement = Movement::findOrFail($id);
+        $movement = $this->movements->findOrFail($id);
         $movement->delete();
 
         return redirect('/movements')->with('status', 'Lançamento excluído com sucesso!');

@@ -12,6 +12,12 @@ use App\Models\Movement;
 
 class MatchController extends Controller
 {
+    public $matchs;
+
+    public function __construct(Match $matchs)
+    {
+        $this->matchs = $matchs;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,11 +26,16 @@ class MatchController extends Controller
      */
     public function index()
     {
-        $matchs = Match::orderBy('created_at','desc')->get();
+        $matchs = $this->matchs->orderBy('created_at','desc')->get();
         $matchs->load('players');
 
         return view('matchs', compact('matchs'));
         // return response()->json($matchs);
+    }
+
+    public function search(Request $request)
+    {
+        return response()->json($request->all());
     }
 
     /**
@@ -45,7 +56,7 @@ class MatchController extends Controller
      */
     public function store(Request $request)
     {
-        $match = Match::create([
+        $match = $this->matchs->create([
             'title' => $request['title_match'],
             'status' => 1, // Ativo.
         ]);
@@ -61,7 +72,7 @@ class MatchController extends Controller
      */
     public function show($id)
     {
-        $match = Match::findOrFail($id);
+        $match = $this->matchs->findOrFail($id);
         $match->load('players');
         $match->load('movement');
 
@@ -106,7 +117,7 @@ class MatchController extends Controller
      */
     public function destroy($id)
     {
-        $match = Match::findOrFail($id);
+        $match = $this->matchs->findOrFail($id);
         $match->delete();
 
         return redirect('/matchs')->with('status', 'Partida excluída com sucesso!');

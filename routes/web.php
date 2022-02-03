@@ -23,6 +23,7 @@ Auth::routes();
 Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/', [ DashBoardController::class, 'index'])->name('home');
+    Route::get('/searchPlayers', [ MatchController::class, 'search'])->name('search');
     Route::resource('/matchs', MatchController::class);
     Route::resource('/players', PlayerController::class);
     Route::resource('/movements', MovementController::class);

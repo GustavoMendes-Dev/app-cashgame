@@ -108,54 +108,52 @@
 											<!--begin:::Tab pane-->
 											<div class="tab-pane fade show active" id="kt_customer_view_overview_tab" role="tabpanel">
 												<!--begin::Card-->
-												<div class="card pt-4 mb-6 mb-xl-9">
+												<div class="card pt-4 mb-6 mb-xl-8">
 													<!--begin::Card header-->
 													<div class="card-header border-0">
 														<!--begin::Card title-->
 														<div class="card-title">
-															<h2>{{ count($match->players)}} Jogadores</h2>
+                              <input class="form-control form-control-lg form-control-solid" type="text" name="search" id="search" autocomplete="off" placeholder="Pesquisar por...">
 														</div>
 														<!--end::Card title-->
 														<!--begin::Card toolbar-->
-                                                        @if ($match->status == 1)
-                                                            <div class="card-toolbar">
-                                                                <!--begin::Filter-->
-                                                                <button type="button" onclick="AddPlayer()" class="btn btn-sm btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                                <span class="svg-icon svg-icon-3">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->Adicionar Jogador</button>
-                                                                <!--end::Filter-->
-                                                            </div>
-                                                            <!--end::Card toolbar-->
-                                                        @endif
+                          @if ($match->status == 1)
+                              <div class="card-toolbar">
+                                  <!--begin::Filter-->
+                                  <button type="button" onclick="AddPlayer()" class="btn btn-sm btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
+                                  <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                  <span class="svg-icon svg-icon-3">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                          <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
+                                          <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
+                                          <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
+                                      </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->Adicionar Jogador</button>
+                                  <!--end::Filter-->
+                              </div>
+                              <!--end::Card toolbar-->
+                          @endif
 													</div>
 													<!--end::Card header-->
 													<!--begin::Card body-->
 													<div class="card-body pt-0 pb-5">
 														<!--begin::Table-->
-														<div id="kt_table_customers_payment_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="table-responsive"><table class="table align-middle table-row-dashed gy-5 dataTable no-footer" id="kt_table_customers_payment">
+														<div class="dataTables_wrapper dt-bootstrap4 no-footer">
+                              <div class="table-responsive">
+                                <table class="table align-middle table-row-dashed gy-5 dataTable no-footer">
 															<!--begin::Table head-->
 															<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
 																<!--begin::Table row-->
 																<tr class="text-start text-muted text-uppercase gs-0">
-                                                                    <th class="min-w-100px sorting" style="width: 150px;">Nome</th>
-                                                                    <th class="sorting" style="width: 80px;">Status</th>
-                                                                    <th class="sorting" style="width: 150px;">Saldo</th>
-                                                                    <th class="text-end min-w-100px pe-4 sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">Ações</th>
-                                                                </tr>
-																<!--end::Table row-->
+                                    <th class="min-w-100px sorting" style="width: 150px;">Nome</th>
+                                    <th class="sorting" style="width: 80px;">Status</th>
+                                    <th class="sorting" style="width: 150px;">Saldo</th>
+                                    <th class="text-end min-w-100px pe-4 sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">Ações</th>
+                                </tr>
 															</thead>
-															<!--end::Table head-->
-															<!--begin::Table body-->
-															<tbody class="fs-6 fw-bold text-gray-600">
-                                                            <!-- {{ $match->players }} -->
-                                                            @foreach($match->players as $player)                         
+															<tbody class="fs-6 fw-bold text-gray-600" id="result_search_players">
+                                  @foreach($match->players as $player)                         
 															    <tr>
 																	<!--begin::Invoice=-->
 																	<td>
@@ -164,11 +162,11 @@
 																	<!--end::Invoice=-->
 																	<!--begin::Status=-->
 																	<td>
-                                                                        @if ($player->status >= 1) 
-                                                                            <span class="badge badge-light-success">Ativo</span>
-                                                                        @else 
-                                                                            <span class="badge badge-light-info">Inativo</span>
-                                                                        @endif
+                                    @if ($player->status >= 1) 
+                                        <span class="badge badge-light-success">Ativo</span>
+                                    @else 
+                                        <span class="badge badge-light-info">Inativo</span>
+                                    @endif
 																	</td>
 																	<!--end::Status=-->
 																	<!--begin::Amount=-->
@@ -177,28 +175,27 @@
 																	<!--begin::Action=-->
 																	<td class="text-end">
 																		<!--begin::Card toolbar-->
-                                                                        <div class="d-flex my-4">
-                                                                            <!--begin::Filter-->
-                                                                            <button onclick="AddSellChips({{$player->id}})" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
-                                                                            <!-- begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                                            <!-- <span class="svg-icon svg-icon-3">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                                                                </svg>
-                                                                            </span> -->
-                                                                            <!--end::Svg Icon -->
-                                                                            Fichas</button>
-                                                                            <!--end::Filter-->
-                                                                            <!--begin::Actions-->
-                                                                            <button onclick="CloseSellChips({{$player->id}})" class="btn btn-sm btn-danger">
-                                                                                <span class="indicator-label">Encerrar</span>
-                                                                            </button>
-                                                                            <!--end::Actions-->
-                                                                        </div>
-                                                                        <!--end::Card toolbar-->
-                                                                        
+                                  <div class="d-flex my-4">
+                                      <!--begin::Filter-->
+                                      <button onclick="AddSellChips({{$player->id}})" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
+                                      <!-- begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                      <!-- <span class="svg-icon svg-icon-3">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                              <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
+                                              <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
+                                              <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
+                                          </svg>
+                                      </span> -->
+                                      <!--end::Svg Icon -->
+                                      Fichas</button>
+                                      <!--end::Filter-->
+                                      <!--begin::Actions-->
+                                      <button onclick="CloseSellChips({{$player->id}})" class="btn btn-sm btn-danger">
+                                          <span class="indicator-label">Encerrar</span>
+                                      </button>
+                                      <!--end::Actions-->
+                                  </div>
+                                  <!--end::Card toolbar-->                           
 																	</td>
 																	<!--end::Action=-->
 																</tr>
@@ -315,10 +312,16 @@
                 console.log('error', error);
             },
         });
-
-        
-   
     }
+
+    $('#search').bind('input', function() {
+        let search = $(this).val();
+        let results = $('#result_search_players');
+
+        $.post('/searchPlayers', search, function(data){
+          results.html(data);
+        });
+    });
 
 </script>
 @endsection
