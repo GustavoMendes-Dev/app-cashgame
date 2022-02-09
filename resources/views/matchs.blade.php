@@ -31,7 +31,7 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->Nova Partida
-</button>
+                            </button>
                         </div>
                     </div>
                     <!--end::Header-->

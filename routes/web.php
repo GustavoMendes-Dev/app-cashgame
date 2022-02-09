@@ -7,17 +7,6 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MovementController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Auth::routes();
 
 Route::middleware(['auth:web'])->group(function () {
@@ -32,6 +21,9 @@ Route::middleware(['auth:web'])->group(function () {
     Route::post('/close-sellchips/{id}', [ MovementController::class, 'closesellchips'])->name('close-sellchips');
     Route::post('/close-match/{id}', [ MatchController::class, 'close'])->name('close.match');
     Route::post('/new-player-in-match/{id}', [ MatchController::class, 'newPlayerInMatch'])->name('newPlayerInMatch');
+
+    Route::get('/setPlayer/{id}', [ PlayerController::class, 'setPlayer'])->name('setPlayer');
+
 
 });
 

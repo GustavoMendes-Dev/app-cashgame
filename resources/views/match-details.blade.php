@@ -226,8 +226,8 @@
 @include('modals.add-sellchips')
 
 <script>
-    let modal = document.querySelector("#modal_add_start_player");
     let modalSellChips = document.querySelector("#modal_add_sell_chips");
+    let modal = document.querySelector("#modal_add_start_player");
     let modalSellChipsClose = document.querySelector("#modal_close_sell_chips");
 
     function AddPlayer(){
@@ -253,10 +253,12 @@
     }
 
     function AddSellChips(id){
+
+        console.log(id)
         
         $.ajax({
             type:'GET',
-            url: `/players/${id}`,
+            url: `/setPlayer/${id}`,
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             dataType: 'JSON',
             success:function(res){
@@ -278,7 +280,7 @@
         
         $.ajax({
             type:'GET',
-            url: `/players/${id}`,
+            url: `/setPlayer/${id}`,
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             dataType: 'JSON',
             success:function(res){

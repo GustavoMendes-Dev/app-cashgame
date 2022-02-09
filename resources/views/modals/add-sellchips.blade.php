@@ -60,26 +60,46 @@
 									<input type="text" class="form-control form-control-solid" placeholder="" name="value" required/>
 								</div>
 								<!--end::Input group-->
-                                <div class="mb-10">
-                                    <!--begin::Label-->
-                                    <label class="form-label fw-bold">Pagamento</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <div>
-                                        <select name="payment" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_61ba8e352a231" data-allow-clear="true" data-select2-id="select2-data-7-y6hv" tabindex="-1" aria-hidden="true" required>
-                                            <option disabled selected data-select2-id="select2-data-9-0z1b">Selecione um pagamento</option>  
-                                            <option value="0">Débito</option>
-											<option value="1">Crédito</option>
-											<option value="2">Dinheiro</option>
-											<option value="3">PIX</option>
-											<option value="4">Fiado</option>
-
-                                        </select>
-                                    </div>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
+                  <div class="mb-10">
+                    <!--begin::Label-->
+                    <label class="form-label fw-bold">Pagamento</label>
+                    <!--end::Label-->
+                    <div class="nav-group nav-group-fluid">
+                      <!--begin::Option-->
+                      <label>
+                        <input type="radio" class="btn-check" name="payment" value="0" checked="checked">
+                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary">Débito</span>
+                      </label>
+                      <!--end::Option-->
+                      <!--begin::Option-->
+                      <label>
+                        <input type="radio" class="btn-check" name="payment" value="1">
+                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">Crédito</span>
+                      </label>
+                      <!--end::Option-->
+                      <!--begin::Option-->
+                      <label>
+                        <input type="radio" class="btn-check" name="payment" value="2">
+                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">Dinheiro</span>
+                      </label>
+                      <!--end::Option-->
+                      <!--begin::Option-->
+                      <label>
+                        <input type="radio" class="btn-check" name="payment" value="3">
+                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">PIX</span>
+                      </label>
+                      <!--end::Option-->
+                      <!--begin::Option-->
+                      <label>
+                        <input type="radio" class="btn-check" name="payment" value="4">
+                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">Fiado</span>
+                      </label>
+                      <!--end::Option-->
+                    </div>
+                  </div>
+                </div>
 							<!--end::Input group-->
+              
 							<!--begin::Actions-->
 							<div class="text-center pt-15">
 								<button onclick="closeModal()" type="reset" class="btn btn-light me-3">Cancelar</button>

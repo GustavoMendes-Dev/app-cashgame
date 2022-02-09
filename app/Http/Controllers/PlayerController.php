@@ -8,6 +8,14 @@ use App\Models\Player;
 
 class PlayerController extends Controller
 {
+    public $players;
+
+    public function __construct(Player $players)
+    {
+        $this->players = $players;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,7 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        $players = Player::all();
+        $players = $this->players->all();
 
         return view('players', compact('players'));
     }
@@ -38,7 +46,11 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_player = $request->all();
+        $this->players->create($new_player);
+
+        return redirect('/players')->with('status', 'Jogador cadastrado com sucesso!');
+
     }
 
     /**
@@ -49,13 +61,25 @@ class PlayerController extends Controller
      */
     public function show($id)
     {
-        $player = Player::findOrFail($id);
+        $player = $this->players->findOrFail($id);
 
-        try {
-            return response()->json($player);
-        } catch (\Exception $e) {
-            throw new MarvelException(NOT_FOUND);
-        }
+        return view('player-details', compact('player'));
+        // return response()->json($player);
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function setPlayer($id)
+    {
+        $player = $this->players->findOrFail($id);
+
+        return response()->json($player);
+
     }
 
     /**
@@ -78,7 +102,18 @@ class PlayerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $player = $this->players->findOrFail($id);
+
+        $data = $request->all();
+
+        // dd($data);
+
+        if ($player) {
+          $player->update($data);
+        }
+
+        return redirect('/players')->with('status', 'Jogador atualizado com sucesso!');
+
     }
 
     /**
@@ -89,6 +124,9 @@ class PlayerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $match = $this->players->findOrFail($id);
+        $match->delete();
+
+        return redirect('/players')->with('status', 'Jogador excluído com sucesso!');
     }
 }
