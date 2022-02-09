@@ -225,7 +225,7 @@
 @include('modals.close-sellchips')
 @include('modals.add-sellchips')
 
-<script>
+<script> 
     let modalSellChips = document.querySelector("#modal_add_sell_chips");
     let modal = document.querySelector("#modal_add_start_player");
     let modalSellChipsClose = document.querySelector("#modal_close_sell_chips");

@@ -44,10 +44,10 @@
 							<div class="d-flex flex-column mb-7 fv-row">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-									<span class="required">Apelido</span>
+									<span>Apelido</span>
 								</label>
 								<!--end::Label-->
-								<input type="text" class="form-control form-control-solid" placeholder="" name="nickname" required/>
+								<input type="text" class="form-control form-control-solid" placeholder="" name="nickname"/>
 							</div>
 							<!--end::Input group-->
 
@@ -55,10 +55,10 @@
 							<div class="d-flex flex-column mb-7 fv-row">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-									<span class="required">Telefone</span>
+									<span>Telefone</span>
 								</label>
 								<!--end::Label-->
-								<input type="text" class="form-control form-control-solid" placeholder="" name="phone" required/>
+								<input type="text" class="form-control form-control-solid" placeholder="" name="phone"/>
 							</div>
 							<!--end::Input group-->
 
@@ -66,10 +66,10 @@
 							<div class="d-flex flex-column mb-7 fv-row">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-									<span class="required">E-mail</span>
+									<span>E-mail</span>
 								</label>
 								<!--end::Label-->
-								<input type="text" class="form-control form-control-solid" placeholder="" name="email" required/>
+								<input type="text" class="form-control form-control-solid" placeholder="" name="email"/>
 							</div>
 							<!--end::Input group-->
 

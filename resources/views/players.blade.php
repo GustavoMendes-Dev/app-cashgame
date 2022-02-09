@@ -55,7 +55,7 @@
                                     @foreach ($players as $player)
                                         <tr>
                                             <td class="min-w-150px">
-                                                <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">{{ $player->name }}</a>
+                                                <a href="{{ url('/players', $player->id)}}" class="text-dark fw-bolder text-hover-primary fs-6">{{ $player->name }}</a>
                                             </td>
                                             <td class="fs-6">{{ $player->nickname }}</td>
                                             <td class="fs-6">{{ $player->phone }}</td>
