@@ -57,6 +57,7 @@ class MatchController extends Controller
             
               $output .= ('
                 <tr>
+                  <td></td>
                   <td>' . $player->name . '</td>
                   <td>R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
                   <td class="text-end">
