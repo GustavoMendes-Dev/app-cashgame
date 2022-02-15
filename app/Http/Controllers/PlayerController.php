@@ -62,9 +62,10 @@ class PlayerController extends Controller
     public function show($id)
     {
         $player = $this->players->findOrFail($id);
+        $player->dealer;
 
-        return view('player-details', compact('player'));
-        // return response()->json($player);
+        // return view('player-details', compact('player'));
+        return response()->json($player);
 
     }
 

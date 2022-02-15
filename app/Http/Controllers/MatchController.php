@@ -54,10 +54,14 @@ class MatchController extends Controller
 
           if($total_row > 0) {
             foreach($players as $player) {
-            
+              if($player->dealer){
+                $dealer = '<span class="badge badge-light-primary fs-8 fw-bolder">Poker Dealer</span>';
+              } else {
+                $dealer = ' ';
+              }
               $output .= ('
                 <tr>
-                  <td></td>
+                  <td>' . $dealer . '</td>
                   <td>' . $player->name . '</td>
                   <td>R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
                   <td class="text-end">
