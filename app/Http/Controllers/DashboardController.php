@@ -12,16 +12,6 @@ use App\Models\Movement;
 
 class DashboardController extends Controller
 {
-    public $matchs;
-    public $players;
-    public $movements;
-
-    public function __construct(Match $matchs, Player $players, Movement $movments)
-    {
-      $this->$matchs = $matchs;
-      $this->$players = $players;
-      $this->$movments = $movments;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -29,9 +19,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $matchs = $this->matchs->all(['id'])->count();
-        $players = $this->players->all(['id'])->count();
-        $movements = $this->movements->orderBy('created_at','desc')->get();
+        $matchs = Match::all(['id'])->count();
+        $players = Player::all(['id'])->count();
+        $movements = Movement::orderBy('created_at','desc')->get();
         
         $inputTotal = collect($movements)->where('type', 0)->sum('value');
         $outputTotal = collect($movements)->where('type', 1)->sum('value');

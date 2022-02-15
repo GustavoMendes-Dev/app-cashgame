@@ -281,7 +281,8 @@
             url:"{{ route('search.players', $match->id) }}",
             method:'GET',
             data:{query:query},
-            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'JSON',
             success:function(data)
             {
               $('tbody').html(data.table_data);
