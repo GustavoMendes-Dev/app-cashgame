@@ -21,6 +21,7 @@ class CreateForeignMatchPlayersTable extends Migration
             $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
             $table->integer('dealer_id')->nullable();
             $table->timestamps();
+             $table->timestamp('deleted_at')->nullable();
         });
     }
 

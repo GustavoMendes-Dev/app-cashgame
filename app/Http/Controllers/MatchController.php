@@ -33,7 +33,7 @@ class MatchController extends Controller
         $matchs->load('players');
 
         return view('matchs', compact('matchs'));
-        // return response()->json($matchs);
+        // return response()->json();
     }
 
     public function searchPlayers(Request $request, $id)
@@ -45,9 +45,10 @@ class MatchController extends Controller
           $query = $request->get('query');
 
           if($query != '') {
-            $players = $match->players()->where('name', 'like', '%'.$query.'%')->get();
+            $players = $match->players()->where('name', 'like', '%'.$query.'%')
+                                        ->where('deleted_at', null)->get();
           } else {
-            $players = $match->players;
+            $players = $match->players()->where('deleted_at', '=', null)->get();
           }
 
           $total_row = $players->count();
@@ -191,7 +192,17 @@ class MatchController extends Controller
         
         $player = $request['player'];
 
-        if(!$player){
+        $player_exists = $this->start->where('player_id', $player)
+                                      ->where('deleted_at', null)
+                                      ->first();
+
+        // dd($player_exists->count());
+
+        if($player_exists) {
+          return back()->withInput()->with('error', 'Jogador já está na partida.');
+        }
+
+        if(!$player) {
             return back()->withInput()->with('error', 'Você precisa selecionar um jogador.');
         }
 

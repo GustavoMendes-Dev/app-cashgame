@@ -103,6 +103,8 @@ class MovementController extends Controller
     {
         $player = $request['player_id'];
         $pending = Player::FindOrFail($player);
+        Start::where('player_id', $player)
+              ->update(['deleted_at' => now()]);
 
         if($request['amount_paid'] > 0) {
 
@@ -129,7 +131,9 @@ class MovementController extends Controller
             ]);
         } 
 
-        $pending->update(['balance' => $request['current_balance']]);
+        $pending->update([
+          'balance' => $request['current_balance']
+        ]);
 
         return back()->withInput()->with('status', 'Jogador ' . $pending->name . ' encerrado com sucesso!');
 

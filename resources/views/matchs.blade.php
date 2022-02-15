@@ -60,7 +60,7 @@
                                                 <a href="{{ url('/matchs', $match->id)}}" class="text-dark fw-bolder text-hover-primary fs-6">{{ $match->title }}</a>
                                             </td>
                                             <td>{{ date('d/m/Y', strtotime($match->created_at)); }}</td>
-                                            <td class="text-dark fw-bolder text-hover-primary fs-6">{{ count($match->players) }}</td>
+                                            <td class="text-dark fw-bolder text-hover-primary fs-6"></td>
                                             <td>
                                                 @if ($match->status >= 1) 
                                                     <span class="badge badge-light-success">Aberta</span>
