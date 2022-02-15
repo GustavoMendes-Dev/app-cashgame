@@ -126,8 +126,8 @@
                     <div class="nav-group nav-group-fluid">
                       <!--begin::Option-->
                       <label>
-                        <input type="radio" class="btn-check" name="payment" value="0" checked="checked">
-                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary">Débito</span>
+                        <input type="radio" class="btn-check" name="payment" value="4" checked="checked">
+                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary">Fiado</span>
                       </label>
                       <!--end::Option-->
                       <!--begin::Option-->
@@ -150,8 +150,8 @@
                       <!--end::Option-->
                       <!--begin::Option-->
                       <label>
-                        <input type="radio" class="btn-check" name="payment" value="4">
-                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">Fiado</span>
+                        <input type="radio" class="btn-check" name="payment" value="0">
+                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">Débito</span>
                       </label>
                       <!--end::Option-->
                     </div>

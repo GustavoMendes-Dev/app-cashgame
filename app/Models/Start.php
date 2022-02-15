@@ -13,7 +13,7 @@ class Start extends Model
 
     protected $table = 'foreign_match_players';
 
-    public $guarded = [];
+    protected $fillable = ['match_id', 'player_id', 'dealer_id'];
 
     public function match(): HasMany
     {

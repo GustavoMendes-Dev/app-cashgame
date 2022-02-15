@@ -17,6 +17,8 @@ class CreateMatchsTable extends Migration
             $table->id();
             $table->string('title');
             $table->integer('status');
+            $table->float('inputs')->nullable();
+            $table->float('outputs')->nullable();
             $table->timestamps();
         });
     }

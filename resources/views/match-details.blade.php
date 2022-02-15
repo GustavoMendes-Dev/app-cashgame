@@ -29,13 +29,13 @@
 											<div class="card-body pt-15">
 												<!--begin::Summary-->
 												<div class="d-flex flex-center flex-column mb-5">
-                                                    <div class="card-footer border-0 d-flex justify-content-center pt-0">
-                                                    @if ( $match->status >= 1 )
-                                                        <span class="badge badge-light-success">Aberta</span>
-                                                    @else
-                                                        <span class="badge badge-light-primary">Fechada</span>
-                                                    @endif
-                                                    </div>
+                            <div class="card-footer border-0 d-flex justify-content-center pt-0">
+                            @if ( $match->status >= 1 )
+                                <span class="badge badge-light-success">Aberta</span>
+                            @else
+                                <span class="badge badge-light-primary">Fechada</span>
+                            @endif
+                            </div>
 													<!--begin::Name-->
 													<a href="#" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1">{{ $match->title }}</a>
 													<!--end::Name-->
@@ -80,152 +80,109 @@
 													<!--end::Info-->
 												</div>
 												<!--end::Summary-->
-                                                @if ($match->status == 1)
-                                                    <div class="separator separator-dashed my-3"></div>
-                                                    <!--begin::Card footer-->
-                                                    <div class="card-footer border-0 d-flex justify-content-center pt-5">
-                                                        <form action="{{ url('/close-match', $match->id)}}" method="POST">
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                            <button type="submit" class="btn btn-sm btn-light-primary">Fechar Partida</button>
-                                                        </form>
-                                                    </div>
-                                                <!--end::Card footer-->
-                                                @endif
-
-                                               
+                          @if ($match->status == 1)
+                              <div class="separator separator-dashed my-3"></div>
+                              <!--begin::Card footer-->
+                              <div class="card-footer border-0 d-flex justify-content-center pt-5">
+                                  <form action="{{ url('/close-match', $match->id)}}" method="POST">
+                                      <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                      <button type="submit" class="btn btn-sm btn-light-primary">Fechar Partida</button>
+                                  </form>
+                              </div>
+                          <!--end::Card footer-->
+                          @endif                         
 											</div>
 											<!--end::Card body-->
 										</div>
 										<!--end::Card-->
-									
 									</div>
 									<!--end::Sidebar-->
 									<!--begin::Content-->
 									<div class="flex-lg-row-fluid ms-lg-15">
-										
-										<!--begin:::Tab content-->
-										<div class="tab-content" id="myTabContent">
-											<!--begin:::Tab pane-->
-											<div class="tab-pane fade show active" id="kt_customer_view_overview_tab" role="tabpanel">
-												<!--begin::Card-->
-												<div class="card pt-4 mb-6 mb-xl-8">
-													<!--begin::Card header-->
-													<div class="card-header border-0">
-														<!--begin::Card title-->
-														<div class="card-title">
-                              <input class="form-control form-control-lg form-control-solid" type="text" name="search" id="search" autocomplete="off" placeholder="Pesquisar por...">
-														</div>
-														<!--end::Card title-->
-														<!--begin::Card toolbar-->
-                          @if ($match->status == 1)
-                              <div class="card-toolbar">
-                                  <!--begin::Filter-->
-                                  <button type="button" onclick="AddPlayer()" class="btn btn-sm btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
-                                  <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                  <span class="svg-icon svg-icon-3">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                          <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                          <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                          <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                      </svg>
-                                  </span>
-                                  <!--end::Svg Icon-->Adicionar Jogador</button>
-                                  <!--end::Filter-->
-                              </div>
-                              <!--end::Card toolbar-->
-                          @endif
-													</div>
-													<!--end::Card header-->
-													<!--begin::Card body-->
-													<div class="card-body pt-0 pb-5">
-														<!--begin::Table-->
-														<div class="dataTables_wrapper dt-bootstrap4 no-footer">
-                              <div class="table-responsive">
-                                <table class="table align-middle table-row-dashed gy-5 dataTable no-footer">
-															<!--begin::Table head-->
-															<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
-																<!--begin::Table row-->
-																<tr class="text-start text-muted text-uppercase gs-0">
-                                    <th class="min-w-100px sorting" style="width: 150px;">Nome</th>
-                                    <th class="sorting" style="width: 80px;">Status</th>
-                                    <th class="sorting" style="width: 150px;">Saldo</th>
-                                    <th class="text-end min-w-100px pe-4 sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">Ações</th>
-                                </tr>
-															</thead>
-															<tbody class="fs-6 fw-bold text-gray-600" id="result_search_players">
-                                  @foreach($match->players as $player)                         
-															    <tr>
-																	<!--begin::Invoice=-->
-																	<td>
-																		<a href="#" class="text-gray-600 text-hover-primary mb-1">{{ $player->name }}</a>
-																	</td>
-																	<!--end::Invoice=-->
-																	<!--begin::Status=-->
-																	<td>
-                                    @if ($player->status >= 1) 
-                                        <span class="badge badge-light-success">Ativo</span>
-                                    @else 
-                                        <span class="badge badge-light-info">Inativo</span>
-                                    @endif
-																	</td>
-																	<!--end::Status=-->
-																	<!--begin::Amount=-->
-																	<td>{{  'R$ '.number_format($player->balance, 2, ',', '.') }}</td>
-																	<!--end::Amount=-->
-																	<!--begin::Action=-->
-																	<td class="text-end">
-																		<!--begin::Card toolbar-->
-                                  <div class="d-flex my-4">
-                                      <!--begin::Filter-->
-                                      <button onclick="AddSellChips({{$player->id}})" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
-                                      <!-- begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                      <!-- <span class="svg-icon svg-icon-3">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                              <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                              <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                              <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                          </svg>
-                                      </span> -->
-                                      <!--end::Svg Icon -->
-                                      Fichas</button>
-                                      <!--end::Filter-->
-                                      <!--begin::Actions-->
-                                      <button onclick="CloseSellChips({{$player->id}})" class="btn btn-sm btn-danger">
-                                          <span class="indicator-label">Encerrar</span>
-                                      </button>
-                                      <!--end::Actions-->
-                                  </div>
-                                  <!--end::Card toolbar-->                           
-																	</td>
-																	<!--end::Action=-->
-																</tr>
-                                                            @endforeach
-                                                            </tbody>
-                                                    <!--end::Table body-->
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <!--end::Table-->
-                                    </div>
-                                    <!--end::Card body-->
-                                </div>
-                                <!--end::Card-->
-                            </div>
-                            <!--end:::Tab pane-->	
-                        </div>
-                        <!--end:::Tab content-->
-                    </div>
-                    <!--end::Content-->
-                </div>
+                    <!--begin:::Tab content-->
+<div class="tab-content">
+  <!--begin:::Tab pane-->
+  <div class="tab-pane fade show active" id="kt_customer_view_overview_tab" role="tabpanel">
+  <!--begin::Card-->
+  <div class="card pt-4 mb-6 mb-xl-8">
+    <!--begin::Card header-->
+    <div class="card-header border-0">
+      <!--begin::Card title-->
+      <div class="card-title">
+        <input class="form-control form-control-lg form-control-solid" type="text" name="search" id="search" placeholder="Pesquisar por...">
+      </div>
+      <!--end::Card title-->
+      <!--begin::Card toolbar-->
+      @if ($match->status == 1)
+          <div class="card-toolbar">
+              <!--begin::Filter-->
+              <button type="button" onclick="AddPlayer()" class="btn btn-sm btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_payment">
+              <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+              <span class="svg-icon svg-icon-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
+                      <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
+                      <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
+                  </svg>
+              </span>
+              <!--end::Svg Icon-->Adicionar Jogador</button>
+              <!--end::Filter-->
+          </div>
+          <!--end::Card toolbar-->
+      @endif
+    </div>
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body pt-0 pb-5">
+      <!--begin::Table-->
+      <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+        <div class="table-responsive">
+          <table class="table align-middle table-row-dashed gy-5 dataTable no-footer">
+        <!--begin::Table head-->
+        <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+          <!--begin::Table row-->
+          <tr class="text-start text-muted text-uppercase gs-0">
+              <th class="min-w-100px sorting" style="width: 150px;">Dealer</th>
+              <th class="min-w-100px sorting" style="width: 150px;">Nome</th>
+              <th class="sorting" style="width: 150px;">Saldo</th>
+              <th class="text-end min-w-100px pe-4 sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">Ações</th>
+          </tr>
+        </thead>
+        <tbody class="fs-6 fw-bold text-gray-600" id="result_search_players">
+           
+        </tbody>
+                          <!--end::Table body-->
+                      </table>
+                  </div>
+              </div>
+              <!--end::Table-->
+          </div>
+          <!--end::Card body-->
+      </div>
+      <!--end::Card-->
+  </div>
+  <!--end:::Tab pane-->	
+</div>
+<!--end:::Tab content-->
+                  </div>
+                  <!--end::Content-->
+                  </div>
             </div>
         </div>
     </div>
 </div>
-@include('modals.add-start-player')
+<div>@include('modals.add-start-player')</div>
 @include('modals.close-sellchips')
 @include('modals.add-sellchips')
 
 <script> 
+
+    // $('#search_player').bind('input', function(){
+    //   var query = $(this).val();
+    //   console.log(query);
+    //   fetch_players_data(query);
+    // });
+
     let modalSellChips = document.querySelector("#modal_add_sell_chips");
     let modal = document.querySelector("#modal_add_start_player");
     let modalSellChipsClose = document.querySelector("#modal_close_sell_chips");
@@ -253,8 +210,6 @@
     }
 
     function AddSellChips(id){
-
-        console.log(id)
         
         $.ajax({
             type:'GET',
@@ -262,7 +217,7 @@
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             dataType: 'JSON',
             success:function(res){
-                console.log(res);
+                console.log('player', res);
                 document.querySelector("#add_name_player").value = res.name;
                 document.querySelector("#add_id_player").value = res.id;
                 modalSellChips.classList.add("show-modal");
@@ -307,7 +262,7 @@
                 });
 
                 $('#amount_paid').bind('input', function(){
-                    current_balance.value = parseInt(total.value, 10) - parseInt($(this).val(), 10);
+                    current_balance.value = parseInt(total.value, 10) + parseInt($(this).val(), 10);
                 });
             },
             error:function(error){
@@ -316,13 +271,29 @@
         });
     }
 
-    $('#search').bind('input', function() {
-        let search = $(this).val();
-        let results = $('#result_search_players');
+    $(document).ready(function(){
 
-        $.post('/searchPlayers', search, function(data){
-          results.html(data);
-        });
+      fetch_players_data();
+
+      function fetch_players_data(query = '')
+      {
+        $.ajax({
+            url:"{{ route('search.players', $match->id) }}",
+            method:'GET',
+            data:{query:query},
+            dataType: 'json',
+            success:function(data)
+            {
+              $('tbody').html(data.table_data);
+            },
+        })
+      }
+
+      $(document).on('keyup', '#search', function(){
+        var query = $(this).val();
+        fetch_players_data(query);
+      });
+
     });
 
 </script>

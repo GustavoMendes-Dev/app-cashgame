@@ -1,5 +1,5 @@
 		<!--begin::Modal - New Card-->
-		<div class="modal fade" id="modal_add_start_player" tabindex="-1" aria-hidden="true">
+		<div class="modal fade" id="modal_add_start_player">
 			<!--begin::Modal dialog-->
 			<div class="modal-dialog modal-dialog-centered mw-650px">
 				<!--begin::Modal content-->
@@ -30,22 +30,31 @@
 							<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 							<!--begin::Input group-->
 							<div class="d-flex flex-column mb-7 fv-row">
-                                <div class="mb-10">
-                                    <!--begin::Label-->
-                                    <label class="form-label fw-bold">Jogadores:</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <div>
-                                        <select name="player" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_61ba8e352a231" data-allow-clear="true" data-select2-id="select2-data-7-y6hv" tabindex="-1" aria-hidden="true" required>
-                                            <option disabled selected data-select2-id="select2-data-9-0z1b">Selecione um jogador</option>
-                                            @foreach($players as $player)   
-                                            <option value="{{ $player->id }}">{{ $player->name }} - {{ $player->nickname }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
+                <div class="mb-10">
+                    <!--begin::Label-->
+                    <label class="form-label fw-bold">Jogadores:</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <div>
+                        <select name="player" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_61ba8e352a231" data-allow-clear="true" data-select2-id="select2-data-7-y6hv" tabindex="-1" aria-hidden="true" required>
+                            <option disabled selected data-select2-id="select2-data-9-0z1b">Selecione um jogador</option>
+                            @foreach($players as $player)   
+                              <option value="{{ $player->id }}">{{ $player->name }} - {{ $player->nickname }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <!--end::Input-->
+                  </div>
+                  <div class="mb-10">
+                    <div class="nav-group nav-group-fluid">
+                      <!--begin::Option-->
+                      <label>
+                        <input type="checkbox" class="btn-check" name="dealer" value="1">
+                        <span class="btn btn-sm btn-color-muted btn-active btn-active-primary">Jogador Poker Dealer da Partida.</span>
+                      </label>
+                      <!--end::Option-->
+                    </div>
+              </div>
 							<!--end::Input group-->
 							<!--begin::Actions-->
 							<div class="text-center pt-15">

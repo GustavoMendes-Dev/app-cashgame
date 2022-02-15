@@ -14,10 +14,12 @@ class CreateForeignMatchPlayersTable extends Migration
     public function up()
     {
         Schema::create('foreign_match_players', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('match_id');
             $table->foreign('match_id')->references('id')->on('matchs')->onDelete('cascade');
             $table->unsignedBigInteger('player_id');
             $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+            $table->integer('dealer_id')->nullable();
             $table->timestamps();
         });
     }

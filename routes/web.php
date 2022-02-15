@@ -12,7 +12,7 @@ Auth::routes();
 Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/', [ DashBoardController::class, 'index'])->name('home');
-    Route::get('/searchPlayers', [ MatchController::class, 'search'])->name('search');
+    Route::get('/searchPlayers/{id}', [ MatchController::class, 'searchPlayers'])->name('search.players');
     Route::resource('/matchs', MatchController::class);
     Route::resource('/players', PlayerController::class);
     Route::resource('/movements', MovementController::class);
@@ -24,6 +24,7 @@ Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/setPlayer/{id}', [ PlayerController::class, 'setPlayer'])->name('setPlayer');
 
-
-});
+    
+  });
+  Route::post('/new-dealer-in-match/{id}', [ MatchController::class, 'newDealerInMatch'])->name('newDealerInMatch');
 
