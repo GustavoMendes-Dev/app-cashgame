@@ -102,9 +102,13 @@ class MovementController extends Controller
     public function closesellchips(Request $request, $id)
     {
         $player = $request['player_id'];
+
         $pending = Player::FindOrFail($player);
         Start::where('player_id', $player)
-              ->update(['deleted_at' => now()]);
+              ->update([
+                'deleted_at' => now(),
+                'dealer_id' => null,
+              ]);
 
         if($request['amount_paid'] > 0) {
 

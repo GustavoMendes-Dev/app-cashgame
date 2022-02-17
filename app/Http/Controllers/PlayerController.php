@@ -29,6 +29,63 @@ class PlayerController extends Controller
     }
 
     /**
+     * Listagem de jogadores para modal de adicionar jogador à partida.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listPlayers(Request $request)
+    {
+        if($request->ajax()) {
+          $output = '';
+          $query = $request->get('query');
+
+          if($query != '') {
+            $list_players = $this->players->where('name', 'like', '%'.$query.'%')
+                                          ->orWhere('nickname', 'like', '%'.$query.'%')->get();
+          } else {
+            $list_players = $this->players->all();;
+          }
+
+          $total_row = $list_players->count();
+
+          if($total_row > 0) {
+            foreach($list_players as $player) {
+              
+              $output .= ('
+                <tr>
+                  <td>' . $player->name . ' - ' . $player->nickname . '</td>
+                  <td class="text-end">
+                  <div>
+                      <label>
+                        <input type="radio" class="btn-check" name="player" value="'. $player->id  .'">
+                        <span class="btn btn-light btn-active-primary btn-sm btn-color-muted btn-active">Selecionar</span>
+                      </label>
+                      <label>
+                        <input type="radio" class="btn-check" name="dealer" value="1">
+                        <span class="btn btn-light btn-active-primary btn-sm btn-color-muted btn-active">Dealer</span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              ');
+            }
+          } else {
+            $output = '
+              <tr>
+                <td align="center" colspan="4">Nenhum jogador encontrado.</td>
+              </tr>
+            ';
+          }
+
+        $list_players = array(
+          'table_data' => $output,
+        );
+
+        return response()->json($list_players);
+    }
+  }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

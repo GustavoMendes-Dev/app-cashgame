@@ -39,7 +39,7 @@ class MatchController extends Controller
     public function searchPlayers(Request $request, $id)
     {
         $match = $this->matchs->findOrFail($id);
-        
+
         if($request->ajax()) {
           $output = '';
           $query = $request->get('query');
@@ -64,9 +64,12 @@ class MatchController extends Controller
                 <tr>
                   <td>' . $dealer . '</td>
                   <td>' . $player->name . '</td>
+                  <td class="fw-bold">R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
+                  <td>R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
+                  <td>R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
                   <td>R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
                   <td class="text-end">
-                    <div class="d-flex my-4">
+                    <div class="text-end">
                         <button onclick="AddSellChips(' . $player->id . ')" class="btn btn-sm btn-primary me-2">Fichas</button>
                         <button onclick="CloseSellChips(' . $player->id . ')" class="btn btn-sm btn-danger">
                             <span class="indicator-label">Encerrar</span>
@@ -221,14 +224,4 @@ class MatchController extends Controller
         // return response()->json($new_start);
         return back()->withInput()->with('status', 'Jogador adicionado com sucesso!');
     }
-
-    // public function newDealerInMatch(Request $request, $id)
-    // {
-    //     $match = $this->matchs->findOrFail($id);
-    //     $match->dealer = $request['dealer'];
-    //     $match->save();
-
-    //     return response()->json($match);
-
-    // }
 }

@@ -13,6 +13,8 @@ Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/', [ DashBoardController::class, 'index'])->name('home');
     Route::get('/searchPlayers/{id}', [ MatchController::class, 'searchPlayers'])->name('search.players');
+    Route::get('/listplayers', [ PlayerController::class, 'listPlayers'])->name('list.players');
+
     Route::resource('/matchs', MatchController::class);
     Route::resource('/players', PlayerController::class);
     Route::resource('/movements', MovementController::class);
