@@ -249,7 +249,7 @@ class MovementController extends Controller
     public function destroy($id)
     {
         $movement = $this->movements->findOrFail($id);
-        dd($movement->match);
+        // dd($movement->match);
 
         $movement->player->balance = $movement->value - ( - $movement->player->balance);
         $movement->player->save();
