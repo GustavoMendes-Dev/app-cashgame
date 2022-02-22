@@ -16,6 +16,11 @@ class Movement extends Model
 
     public function match(): BelongsTo
     {
-        return $this->belongsTo(Match::class, 'match_id', 'id');
+        return $this->belongsTo(Match::class);
+    }
+
+    public function player(): BelongsTo
+    {
+        return $this->belongsTo(Player::class);
     }
 }

@@ -79,6 +79,7 @@ class MovementController extends Controller
             'payment' => $request['payment'],
             'status' => 0, // Por padrão é "Pago".
             'match_id' => $id,
+            'player_id' => $player,
         ]);
 
         // Se o pagamento for Fiado, o status muda para À receber.
@@ -248,6 +249,9 @@ class MovementController extends Controller
     public function destroy($id)
     {
         $movement = $this->movements->findOrFail($id);
+        $movement->player->balance = $movement->value - ( - $movement->player->balance);
+        $movement->player->save();
+
         $movement->delete();
 
         return redirect('/movements')->with('status', 'Lançamento excluído com sucesso!');
