@@ -19,6 +19,9 @@ class CreatePlayersTable extends Migration
             $table->string('nickname')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
+            $table->float('dinheiro')->nullable();
+            $table->float('pix')->nullable();
+            $table->float('cartao')->nullable();
             $table->float('balance')->nullable();
             $table->integer('status');
             $table->timestamps();

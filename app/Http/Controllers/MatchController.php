@@ -65,9 +65,9 @@ class MatchController extends Controller
                   <td>' . $dealer . '</td>
                   <td>' . $player->name . '</td>
                   <td class="fw-bold">R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
-                  <td>R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
-                  <td>R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
-                  <td>R$ ' . number_format($player->balance, 2, ',', '.') .'</td>
+                  <td>R$ ' . number_format($player->dinheiro, 2, ',', '.') .'</td>
+                  <td>R$ ' . number_format($player->pix, 2, ',', '.') .'</td>
+                  <td>R$ ' . number_format($player->cartao, 2, ',', '.') .'</td>
                   <td class="text-end">
                     <div class="text-end">
                         <button onclick="AddSellChips(' . $player->id . ')" class="btn btn-sm btn-primary me-2">Fichas</button>

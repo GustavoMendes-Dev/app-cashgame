@@ -67,10 +67,12 @@
                       <div class="fw-bold text-muted">Entradas</div>
                     </div>
                   </div>
+                  <div class="separator separator-dashed my-3"></div>
+
                   <div class="d-flex flex-wrap flex-center">
                     <div class="border border-gray-300 border-dashed rounded py-3 px-3 mx-4 mb-3">
                       <div class="fs-4 fw-bolder text-gray-700">
-                        <span class="w-50px">{{ $match->output }}</span>
+                        <span class="w-50px">{{ $match->outputs }}</span>
                         <span class="svg-icon svg-icon-3 svg-icon-danger">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none">
@@ -86,7 +88,7 @@
                     </div>
                     <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
                       <div class="fs-4 fw-bolder text-gray-700">
-                        <span class="w-50px">{{ $match->input }}</span>
+                        <span class="w-50px">{{ $match->inputs }}</span>
                         <span class="svg-icon svg-icon-3 svg-icon-success">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none">
@@ -101,7 +103,15 @@
                       <div class="fw-bold text-muted">Entrada de fichas</div>
                     </div>
                   </div>
+
+                  <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
+                      <div class="fs-4 fw-bolder text-gray-700">
+                        <span class="w-50px">{{ $match->inputs - $match->outputs }}</span>
+                      </div>
+                      <div class="fw-bold text-muted">Total de Fichas</div>
+                    </div>
                 </div>
+                
                 @if ($match->status == 1)
                 <div class="separator separator-dashed my-3"></div>
                 <div class="card-footer border-0 d-flex justify-content-center pt-5">

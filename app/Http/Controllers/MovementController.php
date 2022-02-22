@@ -13,14 +13,16 @@ use App\Models\Match;
 class MovementController extends Controller
 {
     public $movements;
+    public $matchs;
 
-    public function __construct(Movement $movements)
+    public function __construct(Movement $movements, Match $matchs)
     {
         $this->movements = $movements;
+        $this->matchs = $matchs;
     }
 
     public function matchs(){
-        $matchs = Match::where('status', 1)->get();
+        $matchs = $this->matchs->where('status', 1)->get();
         return $matchs;
     }
 
@@ -57,18 +59,18 @@ class MovementController extends Controller
             'payment' => 'required',
         ]);
 
+        $match = $this->matchs->FindOrFail($id);
+        $total_inputs = $match->inputs + $request['value'];
+
+        $match->update([
+          'inputs' => $total_inputs,
+        ]);
+
         $player = $request['player_id'];
 
         $pending = Player::FindOrFail($player);
 
         $start = Start::where('match_id', $id)->get();
-        
-        // if($start) {
-        //     $start = Start::create([
-        //         'match_id'  => $match,
-        //         'player_id'  => $player,
-        //     ]);
-        // }
 
         $sell = $this->movements->create([
             'description' => "Compra de Fichas " . $pending->name,
@@ -89,6 +91,25 @@ class MovementController extends Controller
             $pending->update(['balance' => $current]);
         };
 
+        // 2 = Dinheiro
+        // 3 = Pix
+        // 0 e 1 = Cartão
+        
+        if($request['payment'] <= 1) {
+          $current = $pending->cartao + $request['value'];
+          $pending->update(['cartao' => $current]);
+        }
+
+        if($request['payment'] == 3) {
+          $current = $pending->pix + $request['value'];
+          $pending->update(['pix' => $current]);
+        }
+
+        if($request['payment'] == 2) {
+          $current = $pending->dinheiro + $request['value'];
+          $pending->update(['dinheiro' => $current]);
+        }
+
         // return response()->json($pending);
         return back()->withInput()->with('status', 'Fichas adicionadas para ' . $pending->name . ' com sucesso!');
      
@@ -103,7 +124,10 @@ class MovementController extends Controller
     {
         $player = $request['player_id'];
 
-        $pending = Player::FindOrFail($player);
+        $match = $this->matchs->findOrFail($id);
+
+        $pending = Player::findOrFail($player);
+
         Start::where('player_id', $player)
               ->update([
                 'deleted_at' => now(),
@@ -133,7 +157,12 @@ class MovementController extends Controller
                 'status' => 0, // Por padrão é "Pago".
                 'match_id' => $id,
             ]);
+
         } 
+
+        $match->update([
+          'outputs' => $request['buy_chips'],
+        ]);
 
         $pending->update([
           'balance' => $request['current_balance']
