@@ -145,6 +145,7 @@ class MovementController extends Controller
                 'value' => $request['amount_paid'],
                 'payment' => $request['payment'],
                 'match_id' => $id,
+                'player_id' => $player,
             ]);
 
         }
@@ -158,6 +159,7 @@ class MovementController extends Controller
                 'type' => 0, // Entrada.
                 'status' => 0, // Por padrão é "Pago".
                 'match_id' => $id,
+                'player_id' => $player,
             ]);
 
         } 
@@ -250,10 +252,12 @@ class MovementController extends Controller
     public function destroy($id)
     {
         $movement = $this->movements->findOrFail($id);
-        // dd($movement->match);
+        // dd($movement->player);
 
-        $movement->player->balance = $movement->value - ( - $movement->player->balance);
-        $movement->player->save();
+        if ($movement->player) {
+          $movement->player->balance = $movement->value - ( - $movement->player->balance);
+          $movement->player->save();
+        }
 
         $movement->delete();
 
