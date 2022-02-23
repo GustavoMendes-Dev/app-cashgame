@@ -126,6 +126,7 @@ class MovementController extends Controller
         $player = $request['player_id'];
 
         $match = $this->matchs->findOrFail($id);
+        $total_outputs = $match->outputs + $request['value'];
 
         $pending = Player::findOrFail($player);
 
@@ -162,7 +163,7 @@ class MovementController extends Controller
         } 
 
         $match->update([
-          'outputs' => $request['buy_chips'],
+          'outputs' => $total_outputs,
         ]);
 
         $pending->update([
