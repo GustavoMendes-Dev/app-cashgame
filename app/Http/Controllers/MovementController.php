@@ -126,7 +126,7 @@ class MovementController extends Controller
         $player = $request['player_id'];
 
         $match = $this->matchs->findOrFail($id);
-        $total_outputs = $match->outputs + $request['value'];
+        $total_outputs = $match->outputs + $request['buy_chips'];
 
         $pending = Player::findOrFail($player);
 
